@@ -6,10 +6,10 @@ import tailwindcss from "tailwindcss";
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [svgr(), react()],
-  base: "todo-list-react",
   css: {
     postcss: {
       plugins: [tailwindcss()],
     },
   },
+  base: "/todo-list-react",
 });
