@@ -53,7 +53,7 @@ export const useTasks = create<Init & Actions>()((set) => ({
   getTodos: async (auth: ResponseRegister) => {
     set(() => ({ loading: true }));
     try {
-      const res = await fetch(import.meta.env.VITE_URL_TODOS, {
+      const res = await fetch("https://b265d5baf9f7c48e.mokky.dev/todos", {
         method: "GET",
         headers: {
           Accept: "application/json",
@@ -79,7 +79,7 @@ export const useTasks = create<Init & Actions>()((set) => ({
   addTodo: async (todo: ITask, auth: ResponseRegister) => {
     set(() => ({ loading: true }));
     try {
-      const res = await fetch(import.meta.env.VITE_URL_TODOS, {
+      const res = await fetch("https://b265d5baf9f7c48e.mokky.dev/todos", {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -100,15 +100,18 @@ export const useTasks = create<Init & Actions>()((set) => ({
   updateTodo: async (id: number, complete: boolean, auth: ResponseRegister) => {
     set(() => ({ loading: true }));
     try {
-      const res = await fetch(import.meta.env.VITE_URL_TODOS + `/${id}`, {
-        method: "PATCH",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${auth.token}`,
-        },
-        body: JSON.stringify({ completed: complete }),
-      });
+      const res = await fetch(
+        `https://b265d5baf9f7c48e.mokky.dev/todos/${id}`,
+        {
+          method: "PATCH",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${auth.token}`,
+          },
+          body: JSON.stringify({ completed: complete }),
+        }
+      );
 
       if (!res.ok) throw new Error("Попробуйте снова");
 
@@ -132,7 +135,7 @@ export const useTasks = create<Init & Actions>()((set) => ({
     set(() => ({ loading: true }));
     try {
       const res = await fetch(
-        import.meta.env.VITE_URL_TODOS + "?complited=true",
+        "https://b265d5baf9f7c48e.mokky.dev/todos?complited=true",
         {
           method: "GET",
           headers: {
@@ -164,7 +167,7 @@ export const useTasks = create<Init & Actions>()((set) => ({
     set(() => ({ loading: true }));
     try {
       const res = await fetch(
-        import.meta.env.VITE_URL_TODOS +
+        "https://b265d5baf9f7c48e.mokky.dev/todos" +
           (completed !== null ? `?completed=${completed}` : ""),
         {
           method: "GET",
@@ -193,15 +196,18 @@ export const useTasks = create<Init & Actions>()((set) => ({
   updateTextTodo: async (id: number, text: string, auth: ResponseRegister) => {
     set(() => ({ loading: true }));
     try {
-      const res = await fetch(import.meta.env.VITE_URL_TODOS + `/${id}`, {
-        method: "PATCH",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${auth.token}`,
-        },
-        body: JSON.stringify({ text: text }),
-      });
+      const res = await fetch(
+        `https://b265d5baf9f7c48e.mokky.dev/todos/${id}`,
+        {
+          method: "PATCH",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${auth.token}`,
+          },
+          body: JSON.stringify({ text: text }),
+        }
+      );
 
       if (!res.ok) throw new Error("Попробуйте снова");
 

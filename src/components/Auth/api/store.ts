@@ -49,11 +49,14 @@ export const useAuth = create<Init & Actions>()(
         set(() => ({ loading: true }));
 
         try {
-          const res = await fetch(import.meta.env.VITE_URL_REG, {
-            method: "POST",
-            headers,
-            body: JSON.stringify(user),
-          });
+          const res = await fetch(
+            "https://b265d5baf9f7c48e.mokky.dev/register",
+            {
+              method: "POST",
+              headers,
+              body: JSON.stringify(user),
+            }
+          );
 
           if (!res.ok) throw new Error("Попробуйте снова");
 
@@ -74,7 +77,7 @@ export const useAuth = create<Init & Actions>()(
         set(() => ({ loading: true }));
 
         try {
-          const res = await fetch(import.meta.env.VITE_URL_LOGIN, {
+          const res = await fetch("https://b265d5baf9f7c48e.mokky.dev/auth", {
             method: "POST",
             headers,
             body: JSON.stringify(user),
@@ -100,11 +103,14 @@ export const useAuth = create<Init & Actions>()(
         set(() => ({ loading: true }));
 
         try {
-          const res = await fetch(import.meta.env.VITE_URL_USERS + `/${id}`, {
-            method: "PATCH",
-            headers: { ...headers, Authorization: `Bearer ${auth.token}` },
-            body: JSON.stringify(user),
-          });
+          const res = await fetch(
+            `https://b265d5baf9f7c48e.mokky.dev/users/${id}`,
+            {
+              method: "PATCH",
+              headers: { ...headers, Authorization: `Bearer ${auth.token}` },
+              body: JSON.stringify(user),
+            }
+          );
 
           if (!res.ok) throw new Error("Попробуйте снова");
 
