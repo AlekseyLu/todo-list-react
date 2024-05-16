@@ -8,7 +8,7 @@ export const LinkProfile = () => {
   const { auth, logout } = useAuth((state) => state);
   const logoutAccaunt = () => {
     logout();
-    redirect("/auth");
+    redirect("#/auth");
   };
 
   if (!auth) return;
