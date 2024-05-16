@@ -20,7 +20,7 @@ export const Home = () => {
   });
 
   useEffect(() => {
-    if (!auth) redirect("#/auth");
+    if (!auth) redirect("/auth");
   }, [auth, redirect]);
 
   return (
@@ -32,16 +32,16 @@ export const Home = () => {
             path="/"
             element={
               !auth ? (
-                <Navigate to={"#/auth"} replace />
+                <Navigate to={"/auth"} replace />
               ) : (
-                <Navigate to={"#/tasks"} />
+                <Navigate to={"/tasks"} />
               )
             }
           />
-          {auth && <Route path="#/auth" element={<Auth />} />}
-          {auth && <Route path="#/tasks" element={<Tasks />} />}
-          {auth && <Route path="#/profile" element={<Profile />} />}
-          <Route path="#*" element={<NotFound />} />
+          {auth && <Route path="/auth" element={<Auth />} />}
+          {auth && <Route path="/tasks" element={<Tasks />} />}
+          {auth && <Route path="/profile" element={<Profile />} />}
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Layout>
     </div>
