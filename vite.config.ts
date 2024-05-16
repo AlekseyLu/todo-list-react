@@ -11,5 +11,5 @@ export default defineConfig({
       plugins: [tailwindcss()],
     },
   },
-  base: "/todo-list-react",
+  base: "/todo-list-react/",
 });

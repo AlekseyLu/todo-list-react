@@ -24,7 +24,7 @@ const initialValue = {
 export const Register: FC<Props> = ({ setIsLogin }) => {
   const redirect = useNavigate();
   const [user, dispatch] = useReducer(registerReducer, initialValue);
-  const { createNewUser, auth } = useAuth((state) => state);
+  const { createNewUser, auth, err } = useAuth((state) => state);
 
   const handleChangeSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -71,6 +71,11 @@ export const Register: FC<Props> = ({ setIsLogin }) => {
         dispatch={dispatch}
         value={user.password}
       />
+      {err && (
+        <div className="text-red-500 text-sm">
+          Введен не верный логин или пароль
+        </div>
+      )}
       <ButtonCustom
         disabled={fieldWithTextValid<IRegisterUser>(user)}
         label="Продолжить"
