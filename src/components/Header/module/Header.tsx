@@ -16,7 +16,7 @@ export const Header = () => {
 
   return (
     <header className="flex justify-between items-center pt-16 mb-10 max-w-xl m-auto">
-      <Link to="/">
+      <Link to="/todo-list-react/">
         <Title title="T O D O" size="3rem" />
       </Link>
       <div className="flex items-center gap-6 relative">
