@@ -27,7 +27,7 @@ export const Task: FC<IProps> = ({ task }) => {
           onClick={updateTask}
         >
           {task.completed ? (
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 p-1">
               <div className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 w-6 h-6 rounded-full flex items-center justify-center">
                 <svg xmlns="http://www.w3.org/2000/svg" width="11" height="9">
                   <path

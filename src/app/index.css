@@ -9,3 +9,13 @@ html .background-hero {
 html.dark .background-hero {
   background-image: url("./images/bg-desktop-dark.jpg");
 }
+
+@media (max-width: 568px) {
+  html .background-hero {
+    background-image: url("./images/bg-mobile-light.jpg");
+  }
+
+  html.dark .background-hero {
+    background-image: url("./images/bg-mobile-dark.jpg");
+  }
+}
