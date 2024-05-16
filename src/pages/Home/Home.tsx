@@ -29,7 +29,7 @@ export const Home = () => {
       <Layout>
         <Routes>
           <Route
-            path="/"
+            path="*"
             element={
               !auth ? (
                 <Navigate to={"/todo-list-react/auth"} replace />
