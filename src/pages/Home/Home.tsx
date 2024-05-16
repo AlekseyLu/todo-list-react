@@ -38,8 +38,8 @@ export const Home = () => {
               )
             }
           />
-          <Route path="/todo-list-react/auth" element={<Auth />} />
-          <Route path="/todo-list-react/tasks" element={<Tasks />} />
+          {auth && <Route path="/todo-list-react/auth" element={<Auth />} />}
+          {auth && <Route path="/todo-list-react/tasks" element={<Tasks />} />}
           {auth && (
             <Route path="/todo-list-react/profile" element={<Profile />} />
           )}
