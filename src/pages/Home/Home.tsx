@@ -20,7 +20,7 @@ export const Home = () => {
   });
 
   useEffect(() => {
-    if (!auth) redirect("/auth");
+    if (!auth) redirect("/todo-list-react/auth");
   }, [auth, redirect]);
 
   return (
@@ -31,16 +31,18 @@ export const Home = () => {
           <Route
             path="/"
             element={
-              auth === null ? (
-                <Navigate to={"/auth"} replace />
+              !auth ? (
+                <Navigate to={"/todo-list-react/auth"} replace />
               ) : (
-                <Navigate to={"/tasks"} />
+                <Navigate to={"/todo-list-react/tasks"} />
               )
             }
           />
-          <Route path="/auth" element={<Auth />} />
-          <Route path={"/tasks"} element={<Tasks />} />
-          <Route path={"/profile"} element={<Profile />} />
+          <Route path="/todo-list-react/auth" element={<Auth />} />
+          <Route path="/todo-list-react/tasks" element={<Tasks />} />
+          {auth && (
+            <Route path="/todo-list-react/profile" element={<Profile />} />
+          )}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Layout>

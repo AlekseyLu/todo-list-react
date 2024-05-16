@@ -1,4 +1,5 @@
 import { FormEvent, useEffect, useReducer, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { useAuth } from "../../components/Auth/api/store";
 
@@ -21,11 +22,13 @@ const profileReducer = (state: IProfile, action: ReducerActions) => {
 };
 
 export const Profile = () => {
+  const redirect = useNavigate();
   const { updateUser, auth, loading } = useAuth((state) => state);
   const refFocus = useRef<HTMLInputElement>(null);
   const [disabled, setDisabled] = useState(true);
 
   const initialProfile: IProfile = auth!.data;
+
   const [user, dispatch] = useReducer(profileReducer, initialProfile);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -46,6 +49,10 @@ export const Profile = () => {
       setDisabled(true);
     }
   }, [auth, user]);
+
+  useEffect(() => {
+    if (!auth) redirect("/todo-list-react/auth");
+  }, [auth, redirect]);
 
   return (
     <>

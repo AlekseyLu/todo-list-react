@@ -24,7 +24,6 @@ export type IProfile = {
   fullName: string;
   email: string;
   id?: number;
-  password: string;
 };
 
 type Init = {
