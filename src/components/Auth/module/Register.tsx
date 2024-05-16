@@ -10,7 +10,6 @@ import { registerReducer } from "../api/utils";
 import { fieldWithTextValid } from "../api/fieldText";
 import { IRegisterUser } from "../api/types.auth";
 import { useAuth } from "../api/store";
-import { url } from "../../../app/utils";
 
 type Props = {
   setIsLogin: (prev: (arg: boolean) => boolean) => void;
@@ -33,7 +32,7 @@ export const Register: FC<Props> = ({ setIsLogin }) => {
   };
 
   useEffect(() => {
-    if (auth) return redirect(url + "/tasks");
+    if (auth) return redirect("/tasks");
   }, [auth, redirect]);
 
   return (

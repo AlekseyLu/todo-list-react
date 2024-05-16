@@ -1,7 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../api/store";
-import { url } from "../../../app/utils";
 
 export const Unauthorization = () => {
   const redirect = useNavigate();
@@ -13,7 +12,7 @@ export const Unauthorization = () => {
       email: uuidv4(),
       password: uuidv4(),
     });
-    redirect(url + "/tasks");
+    redirect("/tasks");
   };
 
   return (

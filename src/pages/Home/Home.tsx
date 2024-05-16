@@ -9,8 +9,6 @@ import { Auth } from "../../components/Auth/module/Auth";
 import { NotFound } from "../NotFound/NotFound";
 import { Profile } from "../Profile/Profile";
 
-import { url } from "../../app/utils";
-
 export const Home = () => {
   const { auth, logout } = useAuth((state) => state);
   const redirect = useNavigate();
@@ -22,7 +20,7 @@ export const Home = () => {
   });
 
   useEffect(() => {
-    if (!auth) redirect(url + "/auth");
+    if (!auth) redirect("/auth");
   }, [auth, redirect]);
 
   return (
@@ -34,17 +32,15 @@ export const Home = () => {
             path="/"
             element={
               auth === null ? (
-                <Navigate to={url + "/auth"} replace />
+                <Navigate to={"/auth"} replace />
               ) : (
-                <Navigate to={url + "/tasks"} />
+                <Navigate to={"/tasks"} />
               )
             }
           />
           <Route path="/auth" element={<Auth />} />
-          {auth !== null && <Route path={url + "/tasks"} element={<Tasks />} />}
-          {auth !== null && (
-            <Route path={url + "/profile"} element={<Profile />} />
-          )}
+          <Route path={"/tasks"} element={<Tasks />} />
+          <Route path={"/profile"} element={<Profile />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Layout>
