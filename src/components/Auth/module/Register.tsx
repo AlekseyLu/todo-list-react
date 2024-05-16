@@ -4,12 +4,13 @@ import { useNavigate } from "react-router-dom";
 import { Title } from "../../Header/ui/Title";
 import { TextField } from "../ui/TextField";
 import { ButtonCustom } from "../ui/ButtonCustom";
+import { Unauthorization } from "../ui/Unauthorization";
 
 import { registerReducer } from "../api/utils";
 import { fieldWithTextValid } from "../api/fieldText";
 import { IRegisterUser } from "../api/types.auth";
 import { useAuth } from "../api/store";
-import { Unauthorization } from "../ui/Unauthorization";
+import { url } from "../../../app/utils";
 
 type Props = {
   setIsLogin: (prev: (arg: boolean) => boolean) => void;
@@ -32,7 +33,7 @@ export const Register: FC<Props> = ({ setIsLogin }) => {
   };
 
   useEffect(() => {
-    if (auth) return redirect("/tasks");
+    if (auth) return redirect(url + "/tasks");
   }, [auth, redirect]);
 
   return (

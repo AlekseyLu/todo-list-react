@@ -10,6 +10,7 @@ import { ILogin } from "../api/types.auth";
 import { loginReducer } from "../api/utils";
 import { fieldWithTextValid } from "../api/fieldText";
 import { useAuth } from "../api/store";
+import { url } from "../../../app/utils";
 
 type Props = {
   setIsLogin: (prev: (arg: boolean) => boolean) => void;
@@ -31,7 +32,7 @@ export const Login: FC<Props> = ({ setIsLogin }) => {
   };
 
   useEffect(() => {
-    if (auth) return redirect("/tasks");
+    if (auth) return redirect(url + "/tasks");
   }, [auth, redirect]);
 
   return (

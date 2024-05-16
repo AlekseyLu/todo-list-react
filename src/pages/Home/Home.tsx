@@ -2,13 +2,14 @@ import { useEffect } from "react";
 import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 
 import { useAuth } from "../../components/Auth/api/store";
-
-import { NotFound } from "../NotFound/NotFound";
 import { Layout } from "../../components/Layout/Layout";
 import { Header } from "../../components/Header/module/Header";
 import { Tasks } from "../../components/Tasks/module/Tasks";
 import { Auth } from "../../components/Auth/module/Auth";
+import { NotFound } from "../NotFound/NotFound";
 import { Profile } from "../Profile/Profile";
+
+import { url } from "../../app/utils";
 
 export const Home = () => {
   const { auth, logout } = useAuth((state) => state);
@@ -21,7 +22,7 @@ export const Home = () => {
   });
 
   useEffect(() => {
-    if (!auth) redirect("/auth");
+    if (!auth) redirect(url + "/auth");
   }, [auth, redirect]);
 
   return (
@@ -33,15 +34,17 @@ export const Home = () => {
             path="/"
             element={
               auth === null ? (
-                <Navigate to="/auth" replace />
+                <Navigate to={url + "/auth"} replace />
               ) : (
-                <Navigate to="/tasks" />
+                <Navigate to={url + "/tasks"} />
               )
             }
           />
           <Route path="/auth" element={<Auth />} />
-          {auth !== null && <Route path="/tasks" element={<Tasks />} />}
-          {auth !== null && <Route path="/profile" element={<Profile />} />}
+          {auth !== null && <Route path={url + "/tasks"} element={<Tasks />} />}
+          {auth !== null && (
+            <Route path={url + "/profile"} element={<Profile />} />
+          )}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Layout>

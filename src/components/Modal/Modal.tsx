@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../Auth/api/store";
 
 import { ButtonCustom } from "../Auth/ui/ButtonCustom";
+import { url } from "../../app/utils";
 
 type Props = {
   setIsModal: (arg: boolean) => void;
@@ -19,7 +20,7 @@ export const Modal: FC<Props> = ({ setIsModal, isModal }) => {
   const toGoAuth = () => {
     setIsModal(false);
     logout();
-    redirect("/auth", { replace: true });
+    redirect(url + "/auth", { replace: true });
   };
 
   return (
