@@ -32,7 +32,7 @@ export const Register: FC<Props> = ({ setIsLogin }) => {
   };
 
   useEffect(() => {
-    if (auth) return redirect("tasks");
+    if (auth) return redirect("/tasks");
   }, [auth, redirect]);
 
   return (
