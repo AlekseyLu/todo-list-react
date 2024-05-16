@@ -32,7 +32,7 @@ export const Register: FC<Props> = ({ setIsLogin }) => {
   };
 
   useEffect(() => {
-    if (auth) return redirect("/todo-list-react/tasks");
+    if (auth) return redirect("tasks");
   }, [auth, redirect]);
 
   return (

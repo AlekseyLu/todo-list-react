@@ -51,7 +51,7 @@ export const Profile = () => {
   }, [auth, user]);
 
   useEffect(() => {
-    if (!auth) redirect("/todo-list-react/auth");
+    if (!auth) redirect("auth");
   }, [auth, redirect]);
 
   return (
