@@ -16,7 +16,7 @@ export const LinkProfile = () => {
 
   return (
     <div className="opacity-0 invisible absolute p-1 divide-y cursor-auto text-center shadow-lg min-w-32 rounded-md bg-white group-hover:opacity-100 group-hover:visible transition duration-500 z-10 top-30 right-10">
-      <Link to="profile" className="group/profile">
+      <Link to="/todo-list-react/profile" className="group/profile">
         <h2 className="p-3 text-2xl group-hover/profile:text-sky-500 transition">
           {fullName}
         </h2>
