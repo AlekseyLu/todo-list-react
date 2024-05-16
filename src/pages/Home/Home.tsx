@@ -25,7 +25,7 @@ export const Home = () => {
   }, [auth, redirect]);
 
   return (
-    <div className="min-w-80 max-sm:px-4 dark:bg-slate-900 bg-slate-200 bg-[url('./src/app/images/bg-desktop-light.jpg')] h-screen dark:bg-[url('./src/app/images/bg-desktop-dark.jpg')] bg-[length: 300px] bg-no-repeat bg-center bg-top">
+    <div className="background-hero min-w-80 max-sm:px-4 dark:bg-slate-900 bg-slate-200 h-screen bg-[length: 300px] bg-no-repeat bg-center bg-top">
       <Header />
       <Layout>
         <Routes>

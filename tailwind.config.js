@@ -4,7 +4,8 @@ export default {
   theme: {
     extend: {
       backgroundImage: {
-        "hero-bg": "url('./src/app/images/bg-desktop-dark.jpg)",
+        "hero-dark": "url('./src/app/images/bg-desktop-dark.jpg)",
+        "hero-light": "url('./src/app/images/bg-desktop-light.jpg)",
       },
       backgroundPosition: {
         "bottom-4": "center top 1rem",
