@@ -38,7 +38,7 @@ export const Home = () => {
               )
             }
           />
-          {auth && <Route path="/auth" element={<Auth />} />}
+          <Route path="/auth" element={<Auth />} />
           {auth && <Route path="/tasks" element={<Tasks />} />}
           {auth && <Route path="/profile" element={<Profile />} />}
           <Route path="*" element={<NotFound />} />
