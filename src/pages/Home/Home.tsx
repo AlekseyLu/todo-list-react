@@ -32,9 +32,9 @@ export const Home = () => {
             path="/todo-list-react/"
             element={
               auth ? (
-                <Navigate to={"/todo-list-react/tasks"} />
+                <Navigate to="/todo-list-react/tasks" />
               ) : (
-                <Navigate to={"/todo-list-react/auth"} replace />
+                <Navigate to="/todo-list-react/auth" replace />
               )
             }
           />
