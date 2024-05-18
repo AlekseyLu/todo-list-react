@@ -29,7 +29,7 @@ export const EditTask: FC<Props> = ({ task }) => {
   };
 
   const deleteTodo = async () => {
-    if (!auth) return console.log("token false");
+    if (!auth) return console.log("token not valid");
     try {
       await fetch(import.meta.env.VITE_URL_TODOS + `/${task.id}`, {
         method: "DELETE",

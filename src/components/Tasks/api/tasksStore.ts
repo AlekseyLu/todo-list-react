@@ -52,7 +52,7 @@ export const useTasks = create<Init & Actions>()((set) => ({
   getTodos: async (auth: ResponseRegister) => {
     set(() => ({ loading: true }));
     try {
-      const res = await fetch("https://b265d5baf9f7c48e.mokky.dev/todos", {
+      const res = await fetch(import.meta.env.VITE_API_TODOS, {
         method: "GET",
         headers: {
           Accept: "application/json",
@@ -78,7 +78,7 @@ export const useTasks = create<Init & Actions>()((set) => ({
   addTodo: async (todo: ITask, auth: ResponseRegister) => {
     set(() => ({ loading: true }));
     try {
-      const res = await fetch("https://b265d5baf9f7c48e.mokky.dev/todos", {
+      const res = await fetch(import.meta.env.VITE_API_TODOS, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -100,7 +100,7 @@ export const useTasks = create<Init & Actions>()((set) => ({
     set(() => ({ loading: true }));
     try {
       const res = await fetch(
-        `https://b265d5baf9f7c48e.mokky.dev/todos/${id}`,
+        import.meta.env.VITE_API_TODOS + `/${id}`,
         {
           method: "PATCH",
           headers: {
@@ -134,7 +134,7 @@ export const useTasks = create<Init & Actions>()((set) => ({
     set(() => ({ loading: true }));
     try {
       const res = await fetch(
-        "https://b265d5baf9f7c48e.mokky.dev/todos?complited=true",
+        import.meta.env.VITE_API_TODOS + "?complited=true",
         {
           method: "GET",
           headers: {
@@ -166,7 +166,7 @@ export const useTasks = create<Init & Actions>()((set) => ({
     set(() => ({ loading: true }));
     try {
       const res = await fetch(
-        "https://b265d5baf9f7c48e.mokky.dev/todos" +
+        import.meta.env.VITE_API_TODOS +
           (completed !== null ? `?completed=${completed}` : ""),
         {
           method: "GET",
@@ -196,7 +196,7 @@ export const useTasks = create<Init & Actions>()((set) => ({
     set(() => ({ loading: true }));
     try {
       const res = await fetch(
-        `https://b265d5baf9f7c48e.mokky.dev/todos/${id}`,
+        import.meta.env.VITE_API_TODOS + `/${id}`,
         {
           method: "PATCH",
           headers: {

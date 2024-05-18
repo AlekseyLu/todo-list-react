@@ -50,7 +50,7 @@ export const useAuth = create<Init & Actions>()(
 
         try {
           const res = await fetch(
-            "https://b265d5baf9f7c48e.mokky.dev/register",
+            import.meta.env.VITE_API_REGISTER,
             {
               method: "POST",
               headers,
@@ -77,7 +77,7 @@ export const useAuth = create<Init & Actions>()(
         set(() => ({ loading: true }));
 
         try {
-          const res = await fetch("https://b265d5baf9f7c48e.mokky.dev/auth", {
+          const res = await fetch(import.meta.env.VITE_API_LOGIN, {
             method: "POST",
             headers,
             body: JSON.stringify(user),
@@ -104,7 +104,7 @@ export const useAuth = create<Init & Actions>()(
 
         try {
           const res = await fetch(
-            `https://b265d5baf9f7c48e.mokky.dev/users/${id}`,
+            import.meta.env.VITE_API_USERS + `/${id}`,
             {
               method: "PATCH",
               headers: { ...headers, Authorization: `Bearer ${auth.token}` },
