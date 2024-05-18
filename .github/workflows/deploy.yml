@@ -38,7 +38,13 @@ jobs:
       - name: Install dependencies
         run: yarn
       - name: Build
-        run: npm run build
+        run: yarn build
+        env:
+          VITE_URL_USERS: ${{ secrets.VITE_URL_USERS }}
+          VITE_URL_TODOS: ${{ secrets.VITE_URL_TODOS }}
+          VITE_URL_REGISTER: ${{ secrets.VITE_URL_REGISTER }}
+          VITE_URL_LOGIN: ${{ secrets.VITE_URL_LOGIN }}
+          VITE_URL_ME: ${{ secrets.VITE_URL_ME }}
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Upload artifact

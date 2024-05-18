@@ -51,9 +51,8 @@ export const useTasks = create<Init & Actions>()((set) => ({
   ...initialState,
   getTodos: async (auth: ResponseRegister) => {
     set(() => ({ loading: true }));
-    console.log(import.meta.env.VITE_API_TODOS)
     try {
-      const res = await fetch(import.meta.env.VITE_API_TODOS, {
+      const res = await fetch(import.meta.env.VITE_URL_TODOS, {
         method: "GET",
         headers: {
           Accept: "application/json",
@@ -80,7 +79,7 @@ export const useTasks = create<Init & Actions>()((set) => ({
   addTodo: async (todo: ITask, auth: ResponseRegister) => {
     set(() => ({ loading: true }));
     try {
-      const res = await fetch(import.meta.env.VITE_API_TODOS, {
+      const res = await fetch(import.meta.env.VITE_URL_TODOS, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -101,9 +100,8 @@ export const useTasks = create<Init & Actions>()((set) => ({
   updateTodo: async (id: number, complete: boolean, auth: ResponseRegister) => {
     set(() => ({ loading: true }));
     try {
-      console.log("id", import.meta.env.VITE_API_TODOS + `/${id}`)
       const res = await fetch(
-        import.meta.env.VITE_API_TODOS + `/${id}`,
+        import.meta.env.VITE_URL_TODOS + `/${id}`,
         {
           method: "PATCH",
           headers: {
@@ -137,7 +135,7 @@ export const useTasks = create<Init & Actions>()((set) => ({
     set(() => ({ loading: true }));
     try {
       const res = await fetch(
-        import.meta.env.VITE_API_TODOS + "?complited=true",
+        import.meta.env.VITE_URL_TODOS + "?complited=true",
         {
           method: "GET",
           headers: {
@@ -169,7 +167,7 @@ export const useTasks = create<Init & Actions>()((set) => ({
     set(() => ({ loading: true }));
     try {
       const res = await fetch(
-        import.meta.env.VITE_API_TODOS +
+        import.meta.env.VITE_URL_TODOS +
           (completed !== null ? `?completed=${completed}` : ""),
         {
           method: "GET",
@@ -199,7 +197,7 @@ export const useTasks = create<Init & Actions>()((set) => ({
     set(() => ({ loading: true }));
     try {
       const res = await fetch(
-        import.meta.env.VITE_API_TODOS + `/${id}`,
+        import.meta.env.VITE_URL_TODOS + `/${id}`,
         {
           method: "PATCH",
           headers: {

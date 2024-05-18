@@ -30,6 +30,7 @@ export const Login: FC<Props> = ({ setIsLogin }) => {
     login(loginUser);
   };
 
+
   useEffect(() => {
     if (auth) return redirect("/todo-list-react/tasks");
   }, [auth, redirect]);

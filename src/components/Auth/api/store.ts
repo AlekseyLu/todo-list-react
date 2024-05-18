@@ -51,7 +51,7 @@ export const useAuth = create<Init & Actions>()(
 
         try {
           const res = await fetch(
-            import.meta.env.VITE_API_REGISTER,
+            import.meta.env.VITE_URL_REGISTER,
             {
               method: "POST",
               headers,
@@ -78,7 +78,7 @@ export const useAuth = create<Init & Actions>()(
         set(() => ({ loading: true }));
 
         try {
-          const res = await fetch(import.meta.env.VITE_API_LOGIN, {
+          const res = await fetch(import.meta.env.VITE_URL_LOGIN, {
             method: "POST",
             headers,
             body: JSON.stringify(user),
@@ -105,7 +105,7 @@ export const useAuth = create<Init & Actions>()(
 
         try {
           const res = await fetch(
-            import.meta.env.VITE_API_USERS + `/${id}`,
+            import.meta.env.VITE_URL_USERS + `/${id}`,
             {
               method: "PATCH",
               headers: { ...headers, Authorization: `Bearer ${auth.token}` },
