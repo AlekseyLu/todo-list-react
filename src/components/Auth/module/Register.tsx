@@ -1,4 +1,4 @@
-import { FC, FormEvent, useEffect, useReducer } from "react";
+import { FC, FormEvent, useEffect, useReducer, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { Title } from "../../Header/ui/Title";
@@ -24,11 +24,14 @@ const initialValue = {
 export const Register: FC<Props> = ({ setIsLogin }) => {
   const redirect = useNavigate();
   const [user, dispatch] = useReducer(registerReducer, initialValue);
+  const [error, setError] = useState(false);
   const { createNewUser, auth, err } = useAuth((state) => state);
 
   const handleChangeSubmit = (e: FormEvent) => {
     e.preventDefault();
+     if (fieldWithTextValid<IRegisterUser>(user)) return setError(true);
     createNewUser(user);
+    setError(false);
   };
 
   useEffect(() => {
@@ -71,13 +74,12 @@ export const Register: FC<Props> = ({ setIsLogin }) => {
         dispatch={dispatch}
         value={user.password}
       />
-      {err && (
+      {err || error && (
         <div className="text-red-500 text-sm">
           Введен не верный логин или пароль
         </div>
       )}
       <ButtonCustom
-        disabled={fieldWithTextValid<IRegisterUser>(user)}
         label="Продолжить"
       />
       <Unauthorization />

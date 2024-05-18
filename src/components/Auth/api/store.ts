@@ -47,6 +47,7 @@ export const useAuth = create<Init & Actions>()(
       ...initialState,
       createNewUser: async (user: IRegisterUser) => {
         set(() => ({ loading: true }));
+      
 
         try {
           const res = await fetch(

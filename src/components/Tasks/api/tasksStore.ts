@@ -51,6 +51,7 @@ export const useTasks = create<Init & Actions>()((set) => ({
   ...initialState,
   getTodos: async (auth: ResponseRegister) => {
     set(() => ({ loading: true }));
+    console.log(import.meta.env.VITE_API_TODOS)
     try {
       const res = await fetch(import.meta.env.VITE_API_TODOS, {
         method: "GET",
@@ -62,6 +63,7 @@ export const useTasks = create<Init & Actions>()((set) => ({
       });
 
       if (!res.ok) throw new Error("Попробуйте снова");
+
 
       const response = await res.json();
       const result = await response.filter(
@@ -99,6 +101,7 @@ export const useTasks = create<Init & Actions>()((set) => ({
   updateTodo: async (id: number, complete: boolean, auth: ResponseRegister) => {
     set(() => ({ loading: true }));
     try {
+      console.log("id", import.meta.env.VITE_API_TODOS + `/${id}`)
       const res = await fetch(
         import.meta.env.VITE_API_TODOS + `/${id}`,
         {
