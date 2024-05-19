@@ -1,10 +1,48 @@
 import { ILogin, IRegisterUser, ReducerActions } from "./types.auth";
 
+type ResultValidField = {
+  isValid: boolean;
+  error: string;
+};
+
 export const config = {
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",
   },
+};
+
+const regExName = /^[a-z_-]{3,16}$/;
+const regExEmail =
+  /^[-a-z0-9!#$%&'*+/=?^_`{|}~]+(?:\.[-a-z0-9!#$%&'*+/=?^_`{|}~]+)*@(?:[a-z0-9]([-a-z0-9]{0,61}[a-z0-9])?\.)*(?:aero|arpa|asia|biz|cat|com|coop|edu|gov|info|int|jobs|mil|mobi|museum|name|net|org|pro|tel|travel|[a-z][a-z])$/;
+const regExPass = /^.*(?=.{8,})(?=.*[a-zA-Z])(?=.*\d)(?=.*[!#$%&? "]).*$/;
+
+export const fieldValidRegister = (user: IRegisterUser): ResultValidField => {
+  let isValid = false;
+  const { email, fullName, password } = user;
+
+  if (!regExName.test(fullName)) {
+    isValid = true;
+    return { isValid, error: "Не корректное имя" };
+  } else {
+    isValid = false;
+  }
+
+  if (!regExEmail.test(email)) {
+    isValid = true;
+    return { isValid, error: "Не корректная эл. почта" };
+  } else {
+    isValid = false;
+  }
+
+  if (!regExPass.test(password)) {
+    isValid = true;
+    return { isValid, error: "Не надежный пароль" };
+  } else {
+    isValid = false;
+  }
+
+  return { isValid, error: "" };
 };
 
 export const registerReducer = (

@@ -42,7 +42,7 @@ export const TextField: FC<IProps> = ({
         onChange={handleChangeField}
         ref={focusRef}
         disabled={isDisabled}
-        className="px-2 py-1 rounded text-xl dark:text-white text-slate-700 dark:bg-slate-800 bg-slate-100 required hover:outline-none focus:outline-none focus:ring disabled:text-slate-500"
+        className="px-2 py-1 rounded text-xl dark:text-white text-slate-700 dark:bg-slate-800 bg-slate-200 required hover:outline-none focus:outline-none focus:ring disabled:text-slate-500"
       />
     </label>
   );

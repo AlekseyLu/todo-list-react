@@ -6,9 +6,7 @@ import { TextField } from "../ui/TextField";
 import { ButtonCustom } from "../ui/ButtonCustom";
 import { Unauthorization } from "../ui/Unauthorization";
 
-import { registerReducer } from "../api/utils";
-import { fieldWithTextValid } from "../api/fieldText";
-import { IRegisterUser } from "../api/types.auth";
+import { fieldValidRegister, registerReducer } from "../api/utils";
 import { useAuth } from "../api/store";
 
 type Props = {
@@ -25,13 +23,20 @@ export const Register: FC<Props> = ({ setIsLogin }) => {
   const redirect = useNavigate();
   const [user, dispatch] = useReducer(registerReducer, initialValue);
   const [error, setError] = useState(false);
+  const [errMessage, setErrMessage] = useState("")
   const { createNewUser, auth, err } = useAuth((state) => state);
 
   const handleChangeSubmit = (e: FormEvent) => {
     e.preventDefault();
-     if (fieldWithTextValid<IRegisterUser>(user)) return setError(true);
-    createNewUser(user);
-    setError(false);
+    const validUser = fieldValidRegister(user);
+    if (!validUser.isValid) {
+      createNewUser(user);
+      setError(false);
+      setErrMessage("");
+    } else {
+      setError(true);
+      setErrMessage(validUser.error);
+    }
   };
 
   useEffect(() => {
@@ -74,14 +79,13 @@ export const Register: FC<Props> = ({ setIsLogin }) => {
         dispatch={dispatch}
         value={user.password}
       />
-      {err || error && (
-        <div className="text-red-500 text-sm">
-          Введен не верный логин или пароль
-        </div>
-      )}
-      <ButtonCustom
-        label="Продолжить"
-      />
+      {err ||
+        (error && (
+          <div className="text-red-500 text-sm">
+            {errMessage ? errMessage : "Введен не верный логин или пароль"}
+          </div>
+        ))}
+      <ButtonCustom label="Продолжить" />
       <Unauthorization />
     </form>
   );
