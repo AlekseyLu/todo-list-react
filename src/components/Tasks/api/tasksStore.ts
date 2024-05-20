@@ -17,7 +17,8 @@ export type TaskResponse = {
   user: {
     fullName: string;
     email: string;
-  };
+    id: number;
+  }
 };
 
 export type IProfile = {
@@ -37,7 +38,6 @@ type Actions = {
   addTodo: (arg: ITask, auth: ResponseRegister) => void;
   updateTodo: (id: number, complite: boolean, auth: ResponseRegister) => void;
   updateTextTodo: (id: number, text: string, auth: ResponseRegister) => void;
-  getFiltersMadeTodos: (auth: ResponseRegister) => void;
   getFiltersTodos: (auth: ResponseRegister, completed: boolean | null) => void;
 };
 
@@ -52,23 +52,23 @@ export const useTasks = create<Init & Actions>()((set) => ({
   getTodos: async (auth: ResponseRegister) => {
     set(() => ({ loading: true }));
     try {
-      const res = await fetch(import.meta.env.VITE_URL_TODOS, {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${auth.token}`,
-        },
-      });
+      const res = await fetch(
+        import.meta.env.VITE_URL_TODOS + `?user_id=${auth.data.id}`,
+        {
+          method: "GET",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${auth.token}`,
+          },
+        }
+      );
 
       if (!res.ok) throw new Error("Попробуйте снова");
 
-
       const response = await res.json();
-      const result = await response.filter(
-        (el: ITask) => el.user_id === auth.data.id
-      );
-      set(() => ({ tasks: result, err: null }));
+
+      set(() => ({ tasks: response, err: null }));
     } catch (error) {
       console.log(error);
       set(() => ({ err: error, loading: false }));
@@ -100,19 +100,16 @@ export const useTasks = create<Init & Actions>()((set) => ({
   updateTodo: async (id: number, complete: boolean, auth: ResponseRegister) => {
     set(() => ({ loading: true }));
     try {
-      const res = await fetch(
-        import.meta.env.VITE_URL_TODOS + `/${id}`,
-        {
-          method: "PATCH",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${auth.token}`,
-          },
-          body: JSON.stringify({ completed: complete }),
-        }
-      );
-
+      const res = await fetch(import.meta.env.VITE_URL_TODOS + `/${id}`, {
+        method: "PATCH",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${auth.token}`,
+        },
+        body: JSON.stringify({ completed: complete }),
+      });
+      
       if (!res.ok) throw new Error("Попробуйте снова");
 
       const response = await res.json();
@@ -131,35 +128,6 @@ export const useTasks = create<Init & Actions>()((set) => ({
       set(() => ({ loading: false }));
     }
   },
-  getFiltersMadeTodos: async (auth: ResponseRegister) => {
-    set(() => ({ loading: true }));
-    try {
-      const res = await fetch(
-        import.meta.env.VITE_URL_TODOS + "?complited=true",
-        {
-          method: "GET",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${auth?.token}`,
-          },
-        }
-      );
-
-      if (!res.ok) throw new Error("Попробуйте снова");
-
-      const response = await res.json();
-      const result = await response.filter(
-        (el: ITask) => el.user_id === auth.data.id
-      );
-      set(() => ({ tasks: result, err: null }));
-    } catch (error) {
-      console.log(error);
-      set(() => ({ err: error, loading: false }));
-    } finally {
-      set(() => ({ loading: false }));
-    }
-  },
   getFiltersTodos: async (
     auth: ResponseRegister,
     completed: boolean | null
@@ -168,12 +136,11 @@ export const useTasks = create<Init & Actions>()((set) => ({
     try {
       const res = await fetch(
         import.meta.env.VITE_URL_TODOS +
-          (completed !== null ? `?completed=${completed}` : ""),
+          `?user_id=${auth.data.id}` +
+          (completed !== null ? `&completed=${completed}` : ""),
         {
           method: "GET",
           headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
             Authorization: `Bearer ${auth?.token}`,
           },
         }
@@ -182,10 +149,8 @@ export const useTasks = create<Init & Actions>()((set) => ({
       if (!res.ok) throw new Error("Попробуйте снова");
 
       const response = await res.json();
-      const result = await response.filter(
-        (el: ITask) => el.user_id === auth.data.id
-      );
-      set(() => ({ tasks: result, err: null }));
+
+      set(() => ({ tasks: response, err: null }));
     } catch (error) {
       console.log(error);
       set(() => ({ err: error, loading: false }));
@@ -196,18 +161,15 @@ export const useTasks = create<Init & Actions>()((set) => ({
   updateTextTodo: async (id: number, text: string, auth: ResponseRegister) => {
     set(() => ({ loading: true }));
     try {
-      const res = await fetch(
-        import.meta.env.VITE_URL_TODOS + `/${id}`,
-        {
-          method: "PATCH",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${auth.token}`,
-          },
-          body: JSON.stringify({ text: text }),
-        }
-      );
+      const res = await fetch(import.meta.env.VITE_URL_TODOS + `/${id}`, {
+        method: "PATCH",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${auth.token}`,
+        },
+        body: JSON.stringify({ text: text }),
+      });
 
       if (!res.ok) throw new Error("Попробуйте снова");
 
